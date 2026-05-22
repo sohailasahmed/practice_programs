@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>pracrice</title>
+    </head>
+    <body>
+        <h1> Calculator</h1>
+        <form action="/result/" method="POST">
+            {% csrf_token %}
+            {{ form }}
+            {% comment %} <input type="submit" value="Submit"> {% endcomment %}
+        </form>
+    </body>
+</html>
