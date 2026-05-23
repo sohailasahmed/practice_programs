@@ -17,9 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from calculator import views as calview
+from news import views as newsview
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('calculaor/',calview.calculator,name='calculaor'),
-    path('result/',calview.res)
+    path('result/',calview.res),
+    path('news/',newsview.mynews),
 ]
