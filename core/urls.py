@@ -24,4 +24,5 @@ urlpatterns = [
     path('calculaor/',calview.calculator,name='calculaor'),
     path('result/',calview.res),
     path('news/',newsview.mynews),
+    path('news/<n_id>',newsview.NewsDetails)
 ]
