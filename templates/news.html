@@ -6,7 +6,7 @@
         Hello This is news Page
         <marquee onmouseover="stop()" onmouseout="start()" style='background-color:gray;'>
             {% for news in newsall %}
-                <a href='/news/{{news.id}}' style='color:white;'>{{news.news_title}}</a><lbsp>
+                <a href='/news/{{news.news_slug}}' style='color:white;'>{{news.news_title}}</a>&nbsp;&nbsp;
             {% endfor %}
         </marquee>
         <h1>{{Newsdetails.news_title}}</h1>

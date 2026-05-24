@@ -9,9 +9,10 @@ def mynews(request):
     }
     return render(request,'news.html',data)
 
-def NewsDetails(request,n_id):
-    Newsdetails=News.objects.get(id=n_id)
+def NewsDetails(request,slug):
+    Newsdetails = News.objects.get(news_slug=slug)
     data={
         'Newsdetails':Newsdetails
     }
     return render(request,'news.html',data)
+
