@@ -1,7 +1,31 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .forms import calform
+from calculator.models import Laptop
 # Create your views here.
+
+def Devices(request):
+    if request.method=='POST':
+        fn=calform(request.POST)
+        if fn.is_valid():
+            L_Name=request.POST.get('Name')
+            L_Desc=request.POST.get('Description')
+            form_data=Laptop(Laptop_name=L_Name,Laptop_desc=L_Desc,Laptop_img=None)
+            form_data.save()
+            return redirect('Laptop_data')
+
+        else:
+            print(fn.errors)
+    else:
+        fn=calform()
+
+    L_data=Laptop.objects.all().order_by('id')
+    data={
+        'form':fn,
+        'L_data':L_data,
+    }
+    return render(request,"index.html",data)
+
 def calculator(request):
     fn=calform()
     data={

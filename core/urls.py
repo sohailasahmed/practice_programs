@@ -15,14 +15,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from calculator import views as calview
 from news import views as newsview
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',calview.Devices,name="Laptop_data"),
+    # path('',calview.display,name="Laptop_data"),
     path('calculaor/',calview.calculator,name='calculaor'),
     path('result/',calview.res),
     path('news/',newsview.mynews),
     path('news/<slug>',newsview.NewsDetails)
 ]
+
+if settings.DEBUG:
+    urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
