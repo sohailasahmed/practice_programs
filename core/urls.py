@@ -21,12 +21,19 @@ from news import views as newsview
 from django.conf import settings
 from django.conf.urls.static import static
 
+# urls.py
+
+from django.urls import path
+from calculator.views import send_test_email
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',calview.Devices,name="Laptop_data"),
     # path('',calview.display,name="Laptop_data"),
     path('calculaor/',calview.calculator,name='calculaor'),
     path('result/',calview.res),
+    path('send-mail/', send_test_email, name='send_test_email'),    
     path('news/',newsview.mynews),
     path('news/<slug>',newsview.NewsDetails)
 ]

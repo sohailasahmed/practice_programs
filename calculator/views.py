@@ -4,15 +4,32 @@ from .forms import calform
 from calculator.models import Laptop
 # Create your views here.
 
+from django.core.mail import send_mail
+from django.http import HttpResponse
+
+def send_test_email(request,Sub="Default",MSG="Default Message"):
+    subject = Sub
+    message = MSG
+    from_email = None  # Uses DEFAULT_FROM_EMAIL from settings.py Automatically
+    recipient_list = ['example@exmaple.com']   # Target inbox
+
+    try:
+        send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+        return HttpResponse('Email sent successfully!')
+    except Exception as e:
+        return HttpResponse(f'Failed to send email. Error: {e}')
+
+
 def Devices(request):
     if request.method=='POST':
         fn=calform(request.POST)
         if fn.is_valid():
             L_Name=request.POST.get('Name')
             L_Desc=request.POST.get('Description')
-            form_data=Laptop(Laptop_name=L_Name,Laptop_desc=L_Desc,Laptop_img=None)
-            form_data.save()
-            return redirect('Laptop_data')
+            # form_data=Laptop(Laptop_name=L_Name,Laptop_desc=L_Desc,Laptop_img=None)
+            # form_data.save()
+            send_test_email(request,L_Name,L_Desc)
+            return redirect('send_test_email')
 
         else:
             print(fn.errors)
